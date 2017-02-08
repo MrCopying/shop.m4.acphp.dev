@@ -1,0 +1,5 @@
+﻿<IfModule rewrite_module>
+	RewriteEngine on
+	RewriteRule ^$ /WebRoot/ [L]
+	RewriteRule (.*) /WebRoot/$1 [L]
+</IfModule>
