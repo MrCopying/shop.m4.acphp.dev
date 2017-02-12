@@ -1,0 +1,61 @@
+<h1>Category ({{ curr_cat.id }}){{ curr_cat.name }}</h1>
+<ul>
+{% for cat in cats %}
+    <li>id({{ cat.id }}) - {{ cat.name }} </li>
+    {% if products[cat.id]%}
+    <table>
+        <tr>
+            {#<td>img</td>#}
+            <td>id</td>
+            <td>cat</td>
+            <td>name</td>
+            <td>description</td>
+            <td>cost</td>
+            <td>old cost</td>
+            <td>discount</td>
+        </tr>
+        {% for prod in products[cat.id] %}
+            <tr>
+                {#<td>{{ prod.img }}</td>#}
+                <td>{{ prod.id }}</td>
+                <td>{{ prod.category_id }}</td>
+                <td>{{ prod.name }}</td>
+                <td>{{ prod.description }}</td>
+                <td>{{ prod.cost }}</td>
+                <td>{{ prod.cost_old }}</td>
+                <td>{{ (prod.cost_old - prod.cost) }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+{% endfor %}
+</ul>
+
+
+{% if curr_products %}
+    <h2>Products of Current Category</h2>
+    <table>
+        <tr>
+            {#<td>img</td>#}
+            <td>id</td>
+            <td>cat</td>
+            <td>name</td>
+            <td>description</td>
+            <td>cost</td>
+            <td>old cost</td>
+            <td>discount</td>
+        </tr>
+        {% for prod in curr_products %}
+            <tr>
+                {#<td>{{ prod.img }}</td>#}
+                <td>{{ prod.id }}</td>
+                <td>{{ prod.category_id }}</td>
+                <td>{{ prod.name }}</td>
+                <td>{{ prod.description }}</td>
+                <td>{{ prod.cost }}</td>
+                <td>{{ prod.cost_old }}</td>
+                <td>{{ (prod.cost_old - prod.cost) }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

@@ -17,27 +17,31 @@ class PagesController extends Controller{
     }
 
     public function index(){
-        //parent::index();
         //var_dump($this->alias);
         if ( $this->alias ){
             return $this->view($this->alias[count($this->alias)-1]['id']);
+        }elseif($this->params){
+            $this->view();
+            if ($this->data['page']){
+                Router::redirect('/pages/view/' . $this->params[0]);
+            }else{
+                throw new \Exception('Not found page: [' . $this->params[0] .']');
+            }
         }else{
             $this->data['pages'] = $this->model->getList();
         }
+        return 'pages\\index.twig';
     }
 
     public function view($idAlias = null){
         if($idAlias){
-            $alias = $idAlias;
-        }else{
-            $alias = isset($this->params[0])? strtolower($this->params[0]) : null;
-        }
-        if ( $alias ){
-            $this->data['page'] = $this->model->getByAlias($alias);
+            $this->data['page'] = $this->model->getByAliasId($idAlias);
+        }elseif( isset($this->params[0])){
+            $this->data['page'] = $this->model->getByAlias(strtolower($this->params[0]));
         }else{
             throw new \Exception('Not param for Pages\View',303);
         }
-        return VIEW_DIR . 'pages\\view.html';
+        return 'pages\\view.twig';
     }
 
     public function admin_index()

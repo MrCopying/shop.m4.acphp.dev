@@ -69,7 +69,7 @@ class Alias
             foreach ($resSql as $item) {
                 if( ( $item['is_category'] OR !$this->parents )        //optimal search
                     AND (strtolower($alias_uri[$i]) == $item['uri'])  //first condition
-                    AND ($item['parent'] == $parentCategory)          //find parent
+                    AND ($item['parent_id'] == $parentCategory)          //find parent
                     AND (App::hasController($item['controller'])))    //check controller
                 {
                     $this->parents[] = $item;

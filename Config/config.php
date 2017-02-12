@@ -19,6 +19,6 @@ Config::set('db.host', 'localhost');
 Config::set('db.user', 'root');
 Config::set('db.password', '');
 //Config::set('db.db_name', 'mvc');
-Config::set('db.db_name', 'nova');
+Config::set('db.db_name', 'shop_apm');
 
 Config::set('salt', 'nEkc43Dn32Fv5oHsdD');

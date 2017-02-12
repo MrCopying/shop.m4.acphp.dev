@@ -7,25 +7,33 @@ class Page extends Model
 {
     public function getList($only_published = false)
     {
-        $sql = 'select * from pages where 1';
+        $sql = 'SELECT p.id, p.alias, p.alias_id as uri, p.name, p.content, p.is_published FROM page as p WHERE p.alias IS NOT NULL';
+        $union = ' UNION SELECT p.id, p.alias, a.uri, p.name, p.content, p.is_published FROM page as p JOIN alias as a ON p.alias_id = a.id WHERE 1';
         if ($only_published) {
-            $sql.= ' and is_published = 1';
+            $sql.= ' AND is_published = 1';
+            $union.= ' AND is_published = 1';
         }
-        return $this->db->query($sql);
+        return $this->db->query($sql . $union);
     }
 
-    public function getByAlias($alias)
+    public function getByAliasId($alias)
     {
-        $alias = $this->db->escape($alias);
-        $sql = "select * from pages where alias = '{$alias}' limit 1";
+        $alias = (int)$alias;
+        $sql = "select * from page where alias_id = '{$alias}' limit 1";
         $result = $this->db->query($sql);
         return isset($result[0]) ? $result[0] : null;
     }
-
+    public function getByAlias($alias)
+    {
+        $alias = $this->db->escape($alias);
+        $sql = "select * from page where alias = '{$alias}' limit 1";
+        $result = $this->db->query($sql);
+        return isset($result[0]) ? $result[0] : null;
+    }
     public function getById($id)
     {
         $id = (int)$id;
-        $sql = "select * from pages where id = '{$id}' limit 1";
+        $sql = "select * from page where id = '{$id}' limit 1";
         $result = $this->db->query($sql);
         return isset($result[0]) ? $result[0] : null;
     }
@@ -37,13 +45,13 @@ class Page extends Model
 
         $id = (int)$id;
         $alias = $this->db->escape($data['alias']);
-        $title = $this->db->escape($data['title']);
+        $title = $this->db->escape($data['name']);
         $content = $this->db->escape($data['content']);
         $is_published = isset($data['is_published']) ? 1 : 0;
 
         if (!$id) { //Add new record
             $sql = "
-              insert into `pages`
+              insert into `page`
                       set `alias` = '{$alias}',
                           `title` = '{$title}',
                           `content` = '{$content}',
@@ -51,7 +59,7 @@ class Page extends Model
             ";
         } else { //Update existing record
             $sql = "
-              update `pages`
+              update `page`
                       set `alias` = '{$alias}',
                           `title` = '{$title}',
                           `content` = '{$content}',
@@ -65,7 +73,8 @@ class Page extends Model
     public function delete($id)
     {
         $id = (int)$id;
-        $sql = "delete from pages where id = {$id}";
+        $sql = "delete from page where id = {$id}";
         return $this->db->query($sql);
     }
+
 }

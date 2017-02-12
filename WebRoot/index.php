@@ -25,11 +25,8 @@ if( !App::$error ) {
 };
 
 /*
-TODO @MrCopying: Add Twig_Template
-TODO @MrCopying: Edit static pages
-TODO @MrCopying: Add CategoryControler
-TODO @MrCopying: Add Galery
-TODO @MrCopying: ADMIN!!!
+TODO @MrCopying: Add Menu
+
 */
 /*
 function __autoload($class_name)
