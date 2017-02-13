@@ -1,0 +1,45 @@
+﻿Сайт: http://www.novamebel.com
+
+Структура дизайна
+http://www.mebelefes.kiev.ua/
+http://corf-mebel.com.ua/
+
+Структура:
+1. Шапка
+2. Горизонтальное меню / Главная / Наши Работы / О нас / Отзывы / Статьи / Контакты
+			/	  nashi_raboti/  o_nas/ 
+3. Каталог Категорий
+
+Кухни                   /kuhni_mebel_pod_zakaz_kiev
+Шкафы-купе              /shkafi-kupe_mebel_pod_zakaz_kiev
+Гости????ные                /gostinnie_mebel_pod_zakaz_kiev
+Прихожие                    /prihojie_mebel_pod_zakaz_kiev
+Гардеробные комнаты         /garderobnie_komnati_mebel_pod_zakaz_kiev
+Мебель для спальни          /spalni_mebel_pod_zakaz_kiev
+Детская мебель              /detskaya_mebel_pod_zakaz_kiev
+Офисная мебель              /ofisnaya_mebel_pod_zakaz_kiev
+Комоды                      /komodi_mebel_pod_zakaz_kiev
+Мебель для ванной           /mebel_dlya_vannoy_pod_zakaz_kiev
+
+4. Подвал
+
+
+
+Сервисы!
+
+(Главная / О нас / Контакты ) Статические страницы
+(Статьи) Динамические страницы по алиасу!
+(Наши работы) Галирея
+(Отзывы) Формы
+
+
+Админка
+  Главная ( Редактор: Шапки / Подвала / Контента - только текст!) Не трогать Каталог!
+Роуты
+ ---НЕТ--- Создание структуры дерева?
+
+  Статьи --> Создание страниц!
+
+  Каталог --> Создание Разделов - Редактирование Контента (меню на главной?)
+	--> Добавление Фото + название + Описание
+
