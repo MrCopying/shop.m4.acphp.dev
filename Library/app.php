@@ -2,9 +2,15 @@
 
 namespace Library;
 
+use Twig_Loader_Filesystem;
+use Twig_Environment;
+use Twig_Extension_Debug;
+
 class App{
 
     protected static $router;
+
+    public static $twig;
 
     public static $db;
 
@@ -36,6 +42,14 @@ class App{
             self::$error = 100;
             echo 'Call view NOT DB : ' . $exception->getMessage();
         }
+        $loader = new Twig_Loader_Filesystem(VIEW_DIR);
+        self::$twig = new Twig_Environment($loader, array(
+            'cache' => false,
+            //'cache' => VIEW_DIR . '/cache',
+            'debug' => true,
+        ));
+        self::$twig->addExtension(new Twig_Extension_Debug());
+//var_dump(self::$router);
     }
     public static function run()
     {
@@ -54,13 +68,14 @@ class App{
         // Calling controller's method
         // Controller's action may return a view path
         $view_path = $controller_object->$controller_method();
-
-        $view_object = new View($controller_object->getData(), $view_path);
-        $content = $view_object->render();
-
-        $layout_path = VIEW_DIR . $layout . '.html';
-        $layout_view_object = new View(compact('content'), $layout_path);
-        echo $layout_view_object->render();
+        //var_dump($controller_object->getData());
+        echo self::$twig->render($view_path, $controller_object->getData());
+//        $view_object = new View($controller_object->getData(), $view_path);
+//        $content = $view_object->render();
+//
+//        $layout_path = VIEW_DIR . $layout . '.html';
+//        $layout_view_object = new View(compact('content'), $layout_path);
+//        echo $layout_view_object->render();
     }
     public static function hasController($controller){
         return class_exists('Controller\\' . ucfirst(strtolower($controller)) . 'Controller');
